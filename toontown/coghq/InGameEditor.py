@@ -90,7 +90,7 @@ class InGameEditor(AppShell):
         entTypes = list(self.level.entTypes)
         for permanentType in permanentTypes:
             entTypes.remove(permanentType)
-        entTypes.sort()
+        sorted(entTypes)
         numEntities = len(entTypes)
         cascadeMenu = ''
         for index in range(numEntities):
@@ -591,7 +591,7 @@ class InGameEditor(AppShell):
         def getZoneList(callback = handleReturn):
             zoneEntIds = list(self.level.entType2ids['zone'])
             zoneEntIds.remove(LevelConstants.UberZoneEntId)
-            zoneEntIds.sort()
+            sorted(zoneEntIds)
             self.visZonesEditor = LevelVisZonesEditor(self, entId, entSpec[attribName], modelZones=zoneEntIds, updateCommand=handleUpdate)
 
         frame = Frame(self.pageOneFrame.interior())
@@ -665,7 +665,7 @@ class InGameEditor(AppShell):
                 idDict[eType] = self.level.entType2ids.get(eType, [])
 
         typeKeys = list(idDict.keys())
-        typeKeys.sort()
+        sorted(typeKeys)
 
         def getChildEntIds(entity):
             entIds = []
@@ -688,7 +688,7 @@ class InGameEditor(AppShell):
                 continue
             subMenu = Menu(entMenu, tearoff=0)
             entMenu.add_cascade(label=eType, menu=subMenu)
-            idList.sort()
+            sorted(idList)
             numIds = len(idList)
             idIndex = 0
             for id in idList:
@@ -855,7 +855,7 @@ class LevelVisZonesEditor(Pmw.MegaToplevel):
         self.editor = editor
         self.entId = entId
         self.modelZones = modelZones
-        self.modelZones.sort()
+        sorted(self.modelZones)
         self.updateCommand = updateCommand
         hull = self.component('hull')
         balloon = self.balloon = Pmw.Balloon(hull)
@@ -902,7 +902,7 @@ class LevelVisZonesEditor(Pmw.MegaToplevel):
                 self.visible.remove(zoneNum)
         elif zoneNum not in self.visible:
             self.visible.append(zoneNum)
-            self.visible.sort()
+            sorted(self.visible)
         if self.updateCommand:
             self.updateCommand(self.visible)
 

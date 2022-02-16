@@ -293,7 +293,7 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
             difficulty = random.choice(difficultyPool)
             difficultyList.append(difficulty)
 
-        difficultyList.sort()
+        sorted(difficultyList)
         for sectionIndex in sectionsPool:
             difficulty = sectionTypes[sectionIndex][0]
             sectionsPoolByDifficulty[difficulty] += [sectionIndex]
@@ -347,7 +347,7 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
                     enemyIndicesSelected.append(enemyIndex)
                     enemyIndicesPool.remove(enemyIndex)
 
-                enemyIndicesSelected.sort()
+                sorted(enemyIndicesSelected)
             treasureIndicesPool = []
             treasureValuePool = []
             for value in range(1, 5):
@@ -370,7 +370,7 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
                     treasureIndicesPool.remove(treasureIndex)
                     treasureIndicesSelected.append(treasure)
 
-                treasureIndicesSelected.sort()
+                sorted(treasureIndicesSelected)
             spawnPointIndicesPool = []
             spawnPointIndicesSelected = []
             if spawnPointsPool != None:
@@ -387,7 +387,7 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
                     spawnPointIndicesSelected.append(spawnPoint)
                     spawnPointIndicesPool.remove(spawnPoint)
 
-                spawnPointIndicesSelected.sort()
+                sorted(spawnPointIndicesSelected)
             stomperIndicesPool = []
             stomperIndicesSelected = []
             if stompersPool != None:
@@ -404,7 +404,7 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
                     stomperIndicesSelected.append(stomper)
                     stomperIndicesPool.remove(stomper)
 
-                stomperIndicesSelected.sort()
+                sorted(stomperIndicesSelected)
             sctionTuple = (sectionIndex,
              enemyIndicesSelected,
              treasureIndicesSelected,

@@ -14,7 +14,7 @@ class DataStore:
     @classmethod
     def addQueryTypes(cls, typeStrings):
         superTypes = list(zip(list(cls.QueryTypes.values()), list(cls.QueryTypes.keys())))
-        superTypes.sort()
+        sorted(superTypes)
         newTypes = [ item[1] for item in superTypes ] + typeStrings
         newTypes = dict(list(zip(newTypes, list(range(1 + len(newTypes))))))
         return newTypes

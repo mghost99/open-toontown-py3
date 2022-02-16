@@ -1,13 +1,11 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from direct.fsm import StateData
 from toontown.toon import ToonAvatarPanel
 from toontown.friends import ToontownFriendSecret
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from otp.otpbase import OTPGlobals
-import functools
 FLPPets = 1
 FLPOnline = 2
 FLPAll = 3
@@ -146,7 +144,8 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         self.title = DirectLabel(parent=self, relief=None, text='', text_scale=TTLocalizer.FLPtitle, text_fg=(0, 0.1, 0.4, 1), pos=(0.007, 0.0, 0.2))
         background_image = gui.find('**/FriendsBox_Open')
         self['image'] = background_image
-        self.setPos(1.1, 0, 0.54)
+        self.reparentTo(base.a2dTopRight)
+        self.setPos(-0.233, 0, -0.46)
         self.scrollList = DirectScrolledList(parent=self, relief=None, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
          gui.find('**/FndsLst_ScrollDN'),
          gui.find('**/FndsLst_ScrollUp_Rllvr'),
@@ -218,7 +217,6 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         if showType == 1 and playerId:
             if not playerName:
                 return
-                print('ABORTING!!!')
             friendName = playerName
             rolloverName = toonName
         else:
@@ -556,7 +554,7 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
                          0))
 
         if self.panelType == FLPPets:
-            for objId, obj in list(base.cr.doId2do.items()):
+            for objId, obj in base.cr.doId2do.items():
                 from toontown.pets import DistributedPet
                 if isinstance(obj, DistributedPet.DistributedPet):
                     friendPair = (objId, 0)
@@ -569,19 +567,19 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         if self.panelType == FLPAll or self.panelType == FLPOnline:
             if base.wantPets and base.localAvatar.hasPet():
                 petFriends.insert(0, (base.localAvatar.getPetId(), 0))
-        for friendPair in list(self.friends.keys()):
+        for friendPair in self.friends.keys():
             friendButton = self.friends[friendPair]
             self.scrollList.removeItem(friendButton, refresh=0)
             friendButton.destroy()
             del self.friends[friendPair]
 
-        newFriends.sort(key=functools.cmp_to_key(compareFriends))
-        petFriends.sort(key=functools.cmp_to_key(compareFriends))
-        freeChatOneRef.sort(key=functools.cmp_to_key(compareFriends))
-        speedChatOneRef.sort(key=functools.cmp_to_key(compareFriends))
-        freeChatDouble.sort(key=functools.cmp_to_key(compareFriends))
-        speedChatDouble.sort(key=functools.cmp_to_key(compareFriends))
-        offlineFriends.sort(key=functools.cmp_to_key(compareFriends))
+        newFriends.sort()
+        petFriends.sort()
+        freeChatOneRef.sort()
+        speedChatOneRef.sort()
+        freeChatDouble.sort()
+        speedChatDouble.sort()
+        offlineFriends.sort()
         for friendPair in newFriends:
             if friendPair not in self.friends:
                 friendButton = self.makeFriendButton(friendPair)
@@ -659,7 +657,7 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         else:
             self.right['state'] = 'normal'
 
-    def __friendOnline(self, doId, commonChatFlags, whitelistChatFlags):
+    def __friendOnline(self, doId, commonChatFlags, whitelistChatFlags, alert=True):
         if self.panelType == FLPOnline:
             self.__updateScrollList()
 

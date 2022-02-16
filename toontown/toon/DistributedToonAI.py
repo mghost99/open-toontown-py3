@@ -1843,7 +1843,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
              lureExp,
              soundExp,
              dropExp]
-            sortedExp.sort()
+            sorted(sortedExp)
             if trapExp == sortedExp[0]:
                 self.b_setTrackAccess([1, 0, 1, 1, 1, 1, 1])
             elif lureExp == sortedExp[0]:
@@ -3398,7 +3398,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
                 index = special[0]
                 self.gardenSpecials.remove(special)
                 self.gardenSpecials.append((index, newCount))
-                self.gardenSpecials.sort()
+                sorted(self.gardenSpecials)
 
         self.setGardenSpecials(specials)
         self.d_setGardenSpecials(specials)
@@ -3409,12 +3409,12 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
                 newCount = item[1] + count
                 self.gardenSpecials.remove(item)
                 self.gardenSpecials.append((index, newCount))
-                self.gardenSpecials.sort()
+                sorted(self.gardenSpecials)
                 self.b_setGardenSpecials(self.gardenSpecials)
                 return
 
         self.gardenSpecials.append((index, count))
-        self.gardenSpecials.sort()
+        sorted(self.gardenSpecials)
         self.b_setGardenSpecials(self.gardenSpecials)
 
     def removeGardenItem(self, index, count):
@@ -3424,7 +3424,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
                 self.gardenSpecials.remove(item)
                 if newCount > 0:
                     self.gardenSpecials.append((index, newCount))
-                self.gardenSpecials.sort()
+                sorted(self.gardenSpecials)
                 self.b_setGardenSpecials(self.gardenSpecials)
                 return
 

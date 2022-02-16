@@ -1463,7 +1463,7 @@ class BattleCalculatorAI:
                 if currLurer == lurerId and currId not in lureIds:
                     lureIds.append(currId)
 
-        lureIds.sort()
+        sorted(lureIds)
         currId = 1
         for currLureId in lureIds:
             if currLureId != currId:

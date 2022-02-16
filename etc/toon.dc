@@ -256,6 +256,7 @@ from toontown.parties import DistributedPartyJukebox40Activity/AI
 from toontown.parties import DistributedPartyValentineJukeboxActivity/AI
 from toontown.parties import DistributedPartyValentineJukebox40Activity/AI
 from toontown.friends import TTPlayerFriendsManager/UD
+from toontown.friends import FriendsManager/UD
 from toontown.uberdog import TTSpeedchatRelay/UD
 from toontown.safezone import DistributedGolfKart/AI
 from toontown.safezone import DistributedPicnicBasket/AI
@@ -408,6 +409,13 @@ struct datetime {
   uint8 hour;
   uint8 minutes;
   uint8 seconds;
+};
+
+struct FriendEntry {
+  uint32 doId;
+  string name;
+  blob dna;
+  uint32 petId;
 };
 
 dclass ToontownDistrict : DistributedDistrict {
@@ -2849,6 +2857,18 @@ dclass TTAvatarFriendsManager : AvatarFriendsManager {
 };
 
 dclass TTPlayerFriendsManager : PlayerFriendsManager {
+};
+
+dclass FriendsManager : DistributedObject {
+  getFriendsListRequest() clsend;
+  friendsListRequestResp(FriendEntry[]);
+  friendOnline(uint32, uint8, uint8);
+  getAvatarDetails(uint32) clsend;
+  avatarDetailsResp(uint32, blob);
+  removeFriend(uint32) clsend;
+  friendOffline(uint32);
+  goingOffline(uint32);
+  clearList(uint32);
 };
 
 dclass TTSpeedchatRelay : SpeedchatRelay {

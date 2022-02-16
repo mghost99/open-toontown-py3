@@ -47,14 +47,14 @@ def printRoomUsage():
 
     iterateLawbotStages(func)
     roomIds = list(usage.keys())
-    roomIds.sort()
+    sorted(roomIds)
     for roomId in roomIds:
         print('%s: %s' % (roomId, usage[roomId]))
 
 
 def printRoomInfo():
     roomIds = list(StageRoomSpecs.roomId2numCogs.keys())
-    roomIds.sort()
+    sorted(roomIds)
     for roomId in roomIds:
         print('room %s: %s cogs, %s cogLevels, %s merit cogLevels' % (roomId,
          StageRoomSpecs.roomId2numCogs[roomId],

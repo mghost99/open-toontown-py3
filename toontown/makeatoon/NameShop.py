@@ -145,10 +145,10 @@ class NameShop(StateData.StateData):
             self.oldBoy = self.boy
             self.listsLoaded = 0
             self.allTitles = [' '] + [' '] + self.nameGen.boyTitles * self.boy + self.nameGen.girlTitles * self.girl + self.nameGen.neutralTitles
-            self.allTitles.sort()
+            sorted(self.allTitles)
             self.allTitles += [' '] + [' ']
             self.allFirsts = [' '] + [' '] + self.nameGen.boyFirsts * self.boy + self.nameGen.girlFirsts * self.girl + self.nameGen.neutralFirsts
-            self.allFirsts.sort()
+            sorted(self.allFirsts)
             self.allFirsts += [' '] + [' ']
             try:
                 k = self.allFirsts.index('Von')
@@ -421,8 +421,8 @@ class NameShop(StateData.StateData):
         self.pickANameGUIElements.append(self.nameResult)
         self.allPrefixes = self.nameGen.lastPrefixes[:]
         self.allSuffixes = self.nameGen.lastSuffixes[:]
-        self.allPrefixes.sort()
-        self.allSuffixes.sort()
+        sorted(self.allPrefixes)
+        sorted(self.allSuffixes)
         self.allPrefixes = [' '] + [' '] + self.allPrefixes + [' '] + [' ']
         self.allSuffixes = [' '] + [' '] + self.allSuffixes + [' '] + [' ']
         self.titleScrollList = self.makeScrollList(gui, (-0.6, 0, 0.202), (1, 0.8, 0.8, 1), self.allTitles, self.makeLabel, [TextNode.ACenter, 'title'])

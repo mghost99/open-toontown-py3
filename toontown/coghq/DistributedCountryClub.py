@@ -293,7 +293,7 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
         for roomIndex in self.blockedRooms:
             self.allBlockedRooms.append(roomIndex * 2)
 
-        self.allBlockedRooms.sort()
+        sorted(self.allBlockedRooms)
         self.notify.debug('self.allBlockedRooms =%s' % self.allBlockedRooms)
 
     def setCountryClubZone(self, zoneId):

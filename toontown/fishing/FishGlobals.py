@@ -23,7 +23,7 @@ ProbabilityDict = {93: FishItem,
  94: JellybeanItem,
  100: BootItem}
 SortedProbabilityCutoffs = list(ProbabilityDict.keys())
-SortedProbabilityCutoffs.sort()
+sorted(SortedProbabilityCutoffs)
 Rod2JellybeanDict = {0: 10,
  1: 20,
  2: 30,
@@ -807,7 +807,7 @@ def getSimplePondInfo():
                     if fish not in pondFishList:
                         pondFishList.append(fish)
 
-        pondFishList.sort()
+        sorted(pondFishList)
         info[pondId] = pondFishList
 
     return info

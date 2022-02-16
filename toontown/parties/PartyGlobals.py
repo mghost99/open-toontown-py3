@@ -644,7 +644,7 @@ for type in DropObjectTypes:
 
 Name2DOTypeId = {}
 names = list(Name2DropObjectType.keys())
-names.sort()
+sorted(names)
 for i in range(len(names)):
     Name2DOTypeId[names[i]] = i
 

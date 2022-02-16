@@ -30,7 +30,7 @@ class CogdoMaze(MazeBase, DirectObject):
             model.wrtReparentTo(render)
             models.append((model.getPos(self.maze), model.getHpr(self.maze), model))
 
-        models.sort()
+        sorted(models)
         i = 0
         for pos, hpr, model in models:
             wc = CogdoMazeWaterCooler(i, model)

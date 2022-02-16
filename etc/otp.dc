@@ -224,10 +224,10 @@ dclass DistributedAvatar : DistributedSmoothNode, TalkPath_owner, TalkPath_whisp
   confirmAvOnShard(uint32, int8);
 };
 
-struct FriendEntry {
+struct Friend {
   uint32 friendId;
   uint8 friendCode;
-};
+}
 
 dclass DistributedPlayer : DistributedAvatar {
   arrivedOnDistrict(uint32) ownrecv ram;
@@ -242,7 +242,7 @@ dclass DistributedPlayer : DistributedAvatar {
   setWhitelistChatFlags(uint8) broadcast ownrecv ram airecv;
   setSC(uint16) broadcast ownsend airecv;
   setSCCustom(uint16) broadcast ownsend airecv;
-  setFriendsList(FriendEntry[] = []) ownrecv required db airecv;
+  setFriendsList(Friend[] = []) ownrecv required db airecv;
   setDISLname(string) broadcast ownrecv ram;
   setDISLid(uint32 = 0) broadcast ownrecv ram db airecv required;
   OwningAccount(uint32);

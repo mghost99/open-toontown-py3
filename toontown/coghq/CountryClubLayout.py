@@ -198,7 +198,7 @@ class CountryClubLayout:
 
         roomIds.append(rng.choice(startingRoomIDs))
 
-        middleRoomIds.sort()
+        sorted(middleRoomIds)
         print('middleRoomIds=%s' % middleRoomIds)
         roomIds.extend(middleRoomIds)
 

@@ -167,7 +167,7 @@ class PublicPartyGui(DirectFrame):
     def fillActivityList(self, activityIds):
         self.activityList.removeAndDestroyAllItems()
         sortedList = activityIds[:]
-        sortedList.sort()
+        sorted(sortedList)
         lastActivityId = -1
         for activityId in sortedList:
             if activityId == lastActivityId:

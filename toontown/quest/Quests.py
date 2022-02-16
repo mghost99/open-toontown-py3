@@ -17744,7 +17744,7 @@ def getStartingQuests(tier = None):
             elif questId in Tier2QuestsDict[tier]:
                 startingQuests.append(questId)
 
-    startingQuests.sort()
+    sorted(startingQuests)
     return startingQuests
 
 

@@ -318,7 +318,7 @@ class DistributedInGameEditor(DistributedObject.DistributedObject, Level.Level, 
     def buildEntityTree(self):
         self.setChildren([])
         entIds = list(self.entities.keys())
-        entIds.sort()
+        sorted(entIds)
         for entId in entIds:
             ent = self.getEntity(entId)
             ent.setChildren([])

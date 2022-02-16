@@ -1124,7 +1124,7 @@ def nextAvailableCloset(avatar, duplicateItems):
         return None
     closetIds = ClothesToCloset.get(avatar.getMaxClothes())
     closetIds = list(closetIds)
-    closetIds.sort()
+    sorted(closetIds)
     closetId = closetIds[index]
     if closetId == None or closetId == MaxClosetIds[index]:
         return

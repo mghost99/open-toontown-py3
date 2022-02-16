@@ -23,6 +23,10 @@ uberdogs:
       id: 4687
       anonymous: false
 
+    - class: FriendsManager
+      id: 4501
+      anonymous: false
+
     - class: TTSpeedchatRelay
       id: 4712
       anonymous: false

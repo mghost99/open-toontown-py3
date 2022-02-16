@@ -662,7 +662,7 @@ class DistributedChineseCheckers(DistributedNode.DistributedNode):
             elif owner == 6:
                 self.locatorList[x].setColor(self.playerColors[5])
 
-        self.mySquares.sort()
+        sorted(self.mySquares)
         self.checkForWin()
 
     def animatePeice(self, tableState, moveList):

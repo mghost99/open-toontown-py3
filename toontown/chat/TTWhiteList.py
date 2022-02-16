@@ -139,7 +139,7 @@ class TTWhiteList(WhiteList, DirectObject):
         for line in lines:
             self.words.append(line.strip(b'\n\r').lower())
 
-        self.words.sort()
+        sorted(self.words)
         self.numWords = len(self.words)
         self.defaultWord = TTLocalizer.ChatGarblerDefault[0]
 

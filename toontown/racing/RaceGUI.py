@@ -368,7 +368,7 @@ class RaceGUI:
          2: TTLocalizer.KartRace_SecondSuffix,
          3: TTLocalizer.KartRace_ThirdSuffix,
          4: TTLocalizer.KartRace_FourthSuffix}
-        placeSorter.sort()
+        sorted(placeSorter)
         for x, p in zip(placeSorter, range(len(placeSorter), 0, -1)):
             self.racerDict[x[1]].update(place=p + placeCount - len(placeSorter))
 

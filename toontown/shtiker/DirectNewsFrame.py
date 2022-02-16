@@ -257,7 +257,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
             filename = self.rf.readline()
 
         del self.rf
-        self.newsFiles.sort()
+        sorted(self.newsFiles)
         self.newsIndexEntries = list(self.newsFiles)
         self.notify.info('Server lists %s news files' % len(self.newsFiles))
         self.notify.debug('self.newsIndexEntries=%s' % self.newsIndexEntries)

@@ -357,7 +357,7 @@ TrackDict = {RT_Speedway_1: (TrackPath + 'RT_SpeedwayA',
                   'GS_Race_CC.ogg',
                   (0.002, 0.003))}
 TrackIds = list(TrackDict.keys())
-TrackIds.sort()
+sorted(TrackIds)
 
 def getEntryFee(trackId, raceType):
     fee = 0

@@ -75,7 +75,7 @@ class DistCogdoMazeGameAI(DistCogdoGameAI, DistCogdoMazeGameBase):
         for waterCooler in mazeModel.findAllMatches('**/*waterCooler'):
             waterCoolerList.append((waterCooler.getPos(mazeModel), waterCooler.getHpr(mazeModel)))
 
-        waterCoolerList.sort()
+        sorted(waterCoolerList)
         baseNp = NodePath('base')
         rotNp = baseNp.attachNewNode('rot')
         childNp = rotNp.attachNewNode('child')

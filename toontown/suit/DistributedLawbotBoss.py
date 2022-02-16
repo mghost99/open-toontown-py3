@@ -796,7 +796,7 @@ class DistributedLawbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         allCannonsAppear = Sequence(Func(self.__positionToonsInFrontOfCannons), Func(camera.reparentTo, localAvatar), Func(camera.setPos, localAvatar.cameraPositions[2][0]), Func(camera.lookAt, localAvatar))
         multiCannons = Parallel()
         index = 0
-        self.involvedToons.sort()
+        sorted(self.involvedToons)
         for toonId in self.involvedToons:
             toon = self.cr.doId2do.get(toonId)
             if toon:
@@ -1667,7 +1667,7 @@ class DistributedLawbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def __positionToonsInFrontOfCannons(self):
         self.notify.debug('__positionToonsInFrontOfCannons')
         index = 0
-        self.involvedToons.sort()
+        sorted(self.involvedToons)
         for toonId in self.involvedToons:
             if index in self.cannons:
                 cannon = self.cannons[index]

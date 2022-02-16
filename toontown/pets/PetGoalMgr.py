@@ -112,7 +112,7 @@ class PetGoalMgr(DirectObject.DirectObject):
         for goal in self.goals:
             goalPairs.append((goal.getPriority(), goal))
 
-        goalPairs.sort()
+        sorted(goalPairs)
         goalPairs.reverse()
         for goalPair in goalPairs:
             string += '\n  %s' % goalPair[1]

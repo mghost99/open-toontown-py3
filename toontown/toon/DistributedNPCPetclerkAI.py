@@ -29,7 +29,7 @@ class DistributedNPCPetclerkAI(DistributedNPCToonBaseAI):
         self.petSeeds = simbase.air.petMgr.getAvailablePets(3, 2)
         numGenders = len(PetDNA.PetGenders)
         self.petSeeds *= numGenders
-        self.petSeeds.sort()
+        sorted(self.petSeeds)
         self.sendUpdateToAvatarId(avId, 'setPetSeeds', [self.petSeeds])
         self.transactionType = ''
         av = self.air.doId2do[avId]

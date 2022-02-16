@@ -1674,7 +1674,7 @@ class CatalogGenerator:
         out = open(Filename(filename).toOsSpecific(), 'w')
         sched = self.generateScheduleDictionary()
         items = list(sched.keys())
-        items.sort()
+        sorted(items)
         for item in items:
             weeklist, maybeWeeklist = sched[item]
             color = self.__formatColor(item.getColor())
@@ -1682,7 +1682,7 @@ class CatalogGenerator:
             self.__determineSeries(seriesDict, weeklist)
             self.__determineSeries(seriesDict, maybeWeeklist)
             seriesList = list(seriesDict.keys())
-            seriesList.sort()
+            sorted(seriesList)
             series = str(seriesList)[1:-1]
             week = self.__formatWeeklist(weeklist)
             maybeWeek = self.__formatWeeklist(maybeWeeklist)

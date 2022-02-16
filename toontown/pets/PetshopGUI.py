@@ -74,7 +74,7 @@ class PetshopGUI(DirectObject):
             else:
                 self.allNames = self.ng.girlFirsts
             self.allNames += self.ng.neutralFirsts
-            self.allNames.sort()
+            sorted(self.allNames)
             self.checkNames()
             self.letters = []
             for name in self.allNames:

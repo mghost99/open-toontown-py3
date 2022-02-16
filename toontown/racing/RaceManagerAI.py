@@ -237,7 +237,7 @@ class RaceManagerAI(DirectObject.DirectObject):
         newTrophies.extend(self.checkHistoryForTrophy(trophies, history, qualIndex, qualReqList, qualIndices))
         self.notify.debug('GrandTouring: Checking from branch: Circuit %s' % avId)
         newTrophies.extend(self.checkForNonRaceTrophies(avId, history))
-        newTrophies.sort()
+        sorted(newTrophies)
         return newTrophies
 
     def checkForRaceTrophies(self, race, avId, inHistory=None):
@@ -278,7 +278,7 @@ class RaceManagerAI(DirectObject.DirectObject):
         newTrophies.extend(singleGenreNewTrophies)
         self.notify.debug('GrandTouring: Checking from branch: Race %s ' % avId)
         newTrophies.extend(self.checkForNonRaceTrophies(avId, history))
-        newTrophies.sort()
+        sorted(newTrophies)
         return newTrophies
 
     def checkForNonRaceTrophies(self, avId, inHistory=None):
@@ -509,7 +509,7 @@ class RaceManagerAI(DirectObject.DirectObject):
                 trophies[trophy] = 1
 
             av.b_setKartingTrophies(trophies)
-        trophiesWon.sort()
+        sorted(trophiesWon)
         return trophiesWon
 
     def checkForTrophy(self, place, trackId, raceType, numRacers, avId, historyIndex, trophyIndices, trophyReqList, historyTotalList, totalTrophyIndex, totalReq):
