@@ -1,0 +1,36 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Toontown
+resources/
+news/
+sign/
+whitelist/
+logs/
+data/
+*.buildings
+*.trackRecords
+errorCode
+*.json
+
+# Linux/Mac
+*.so
+*.DS_Store
+
+# Pictures
+*.jpg
+
+# Visual Studio Code
+!win32/.vscode/tasks.json
+!linux/.vscode/tasks.json
+!darwin/.vscode/tasks.json
+*.code-workspace
+
+# Extras
+.idea
+venv/
+PPYTHON_PATH
+local/
