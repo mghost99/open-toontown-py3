@@ -41,3 +41,21 @@ class OTPInternalRepository(AstronInternalRepository):
             dg.addUint16(fieldId)
 
         self.send(dg)
+
+    def readerPollOnce(self):
+        try:
+            return AstronInternalRepository.readerPollOnce(self)
+        except SystemExit as KeyboardInterrupt:
+            raise
+        except Exception as e:
+            if self.getAvatarIdFromSender() > 100000000:
+                dg = PyDatagram()
+                dg.addServerHeader(self.getMsgSender(), self.ourChannel, CLIENTAGENT_EJECT)
+                dg.addUint16(166)
+                dg.addString('You were disconnected to prevent a district reset.')
+                self.send(dg)
+            self.writeServerEvent('INTERNAL-EXCEPTION', self,getAvatarIdFromSender(), self.getAccountIdFromSender, repr(e), traceback.format_exc())
+            self.notify.warning('INTERNAL-EXCEPTION: {0} ({1})'.format(repr(e), self.getAvatarIdFromSender))
+            print(traceback.format_exc)
+            sys.exc_clear()
+        return 1
