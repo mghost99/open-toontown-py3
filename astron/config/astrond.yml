@@ -15,6 +15,10 @@ uberdogs:
       id: 4688
       anonymous: false
 
+    - class: FriendManager
+      id: 4501
+      anonymous: false
+
     - class: AvatarFriendsManager
       id: 4686
       anonymous: false
@@ -23,8 +27,8 @@ uberdogs:
       id: 4687
       anonymous: false
 
-    - class: FriendsManager
-      id: 4501
+    - class: ToontownFriendsManager
+      id: 4707
       anonymous: false
 
     - class: TTSpeedchatRelay

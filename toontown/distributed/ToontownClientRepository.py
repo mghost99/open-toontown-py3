@@ -79,7 +79,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.whitelistMgr = None
         self.toontownTimeManager = ToontownTimeManager.ToontownTimeManager()
         #self.chatManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_CHAT_MANAGER, 'ChatManager')
-        self.friendsManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_FRIEND_MANAGER, 'FriendsManager')
+        self.toontownFriendsManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_TOONTOWN_FRIENDS_MANAGER, 'ToontownFriendsManager')
         self.avatarFriendsManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_AVATAR_FRIENDS_MANAGER, 'AvatarFriendsManager')
         self.playerFriendsManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_PLAYER_FRIENDS_MANAGER, 'TTPlayerFriendsManager')
         self.speedchatRelay = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_TOONTOWN_SPEEDCHAT_RELAY, 'TTSpeedchatRelay')
@@ -391,7 +391,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
             pad.delayDelete.destroy()
 
     def __sendGetAvatarDetails(self, avId):
-        self.friendsManager.d_getAvatarDetails(avId)
+        self.toontownFriendsManager.sendGetAvatarDetailsRequest(avId)
 
     def handleGetAvatarDetailsResp(self, di):
         avId = di.getUint32()
@@ -797,7 +797,14 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         return 1
 
     def removeFriend(self, avatarId):
-        self.friendsManager.d_removeFriend(avatarId)
+        self.toontownFriendsManager.sendRemoveFriend(avatarId)
+        if base.housingEnabled:
+            self.estateMgr.removeFriend(base.localAvatar.doId, avatarId)
+        for pair in base.localAvatar.friendsList:
+            friendId = pair[0]
+            if friendId == avatarId:
+                base.localAvatar.friendsList.remove(pair)
+                return
 
     def clearFriendState(self):
         self.friendsMap = {}
@@ -806,7 +813,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.friendsListError = 0
 
     def sendGetFriendsListRequest(self):
-        self.friendsManager.d_getFriendsListRequest()
+        self.toontownFriendsManager.sendGetFriendsListRequest()
 
     def cleanPetsFromFriendsMap(self):
         for objId, obj in list(self.friendsMap.items()):
@@ -921,6 +928,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
             del self.friendsOnline[doId]
             messenger.send('friendOffline', [doId])
         except:
+            print("Uh oh! Couldn't set toon friend as offline.")
             pass
 
     def getFirstBattle(self):
@@ -1133,7 +1141,11 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
     def requestAvatarInfo(self, avId):
         if avId == 0:
             return
-        self.friendsManager.d_requestAvatarInfo([avId])
+        datagram = PyDatagram()
+        datagram.addUint16(CLIENT_GET_FRIEND_LIST_EXTENDED)
+        datagram.addUint16(1)
+        datagram.addUint32(avId)
+        base.cr.send(datagram)
 
     def queueRequestAvatarInfo(self, avId):
         removeTask = 0
@@ -1151,4 +1163,10 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
             return
         if len(self.avatarInfoRequests) == 0:
             return
-        self.friendsManager.d_requestAvatarInfo(self.avatarInfoRequests)
+        datagram = PyDatagram()
+        datagram.addUint16(CLIENT_GET_FRIEND_LIST_EXTENDED)
+        datagram.addUint16(len(self.avatarInfoRequests))
+        for avId in self.avatarInfoRequests:
+            datagram.addUint32(avId)
+
+        base.cr.send(datagram)

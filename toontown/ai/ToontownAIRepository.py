@@ -90,6 +90,8 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.trophyMgr = None
         self.safeZoneManager = None
         self.magicWordManager = None
+        self.friendManager = None
+        self.toontownFriendsManager = None
         self.zoneTable = {}
         self.dnaStoreMap = {}
         self.dnaDataMap = {}
@@ -219,6 +221,13 @@ class ToontownAIRepository(ToontownInternalRepository):
         # Generate our magic word manager...
         self.magicWordManager = ToontownMagicWordManagerAI(self)
         self.magicWordManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+
+        # Generate our friend manager...
+        self.friendManager = self.generateGlobalObject(OTP_DO_ID_FRIEND_MANAGER, 'FriendManager')
+
+        # Generate our Toontown Friends Manager
+        self.toontownFriendsManager = self.generateGlobalObject(OTP_DO_ID_TOONTOWN_FRIENDS_MANAGER,
+                                                                    'ToontownFriendsManager')
 
     def generateHood(self, hoodConstructor, zoneId):
         # Bossbot HQ doesn't use DNA, so we skip over that.
@@ -436,7 +445,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         return leaderBoards
 
     def getTrackClsends(self):
-        return False
+        return True
 
     def getAvatarExitEvent(self, avId):
         return 'distObjDelete-%d' % avId
@@ -472,3 +481,9 @@ class ToontownAIRepository(ToontownInternalRepository):
     def setupFiles(self):
         if not os.path.exists(self.dataFolder):
             os.mkdir(self.dataFolder)
+
+    def makeFriends(self, avatarAId, avatarBId, flags, context):
+        self.toontownFriendsManager.sendMakeFriends(avatarAId, avatarBId, flags, context)
+
+    def requestSecret(self, requesterId):
+        self.toontownFriendsManager.sendRequestSecret(requesterId)

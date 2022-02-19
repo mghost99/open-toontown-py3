@@ -2589,29 +2589,3 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
 
     def getTransitioning(self):
         return self.transitioning
-
-    def setFriendsList(self, friendsList):
-        DistributedPlayer.DistributedPlayer.setFriendsList(self, friendsList)
-        for friendId, trueFriend in self.friendsList:
-            if (friendId, trueFriend) in self.oldFriendsList:
-                continue
-
-            friend = self.cr.doId2do.get(friendId)
-            if friend:
-                base.cr.friendsManager.friendOnline(friendId, 0, 0, False)
-
-        for friendPair in self.oldFriendsList:
-            if friendPair in self.friendsList:
-                continue
-
-            if type(friendPair) == tuple:
-                friendId = friendPair[0]
-            else:
-                friendId = friendPair
-
-            friend = self.cr.doId2do.get(friendId)
-            if not friend:
-                continue
-
-            if hasattr(base.localAvatar, 'inEstate') and base.localAvatar.inEstate:
-                base.cr.estateMgr.removeFriend(self.getDoId(), friendId)
